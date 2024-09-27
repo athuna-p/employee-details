@@ -1,1 +1,40 @@
-<p>employee-list works!</p>
+<div class="employee-list">
+    <button class="btn-logout" (click)="logout()">Logout</button>
+
+    <div class="employee-list-content">
+        <h2>Employee List</h2>
+        <button class="btn-add-employee" (click)="openAddRegistration()">Add Employee</button>
+        <input type="text" placeholder="Search..." [(ngModel)]="searchTerm" (input)="filterEmployees()" class="search-input mt-2" />
+
+        <div class="table-container mt-2">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Employee Name</th>
+                        <th>Contact No</th>
+                        <th>Email</th>
+                        <th>Address</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let employee of paginatedEmployees">
+                        <td>{{ employee.name }}</td>
+                        <td>{{ employee.contactNo }}</td>
+                        <td>{{ employee.email }}</td>
+                        <td>{{ employee.address }}</td>
+                        <td>
+                            <button (click)="deleteEmployee(employee.id)" class="btn-delete">Delete</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="pagination">
+            <button (click)="prevPage()" [disabled]="currentPage === 1">Previous</button>
+            <span>Page {{ currentPage }} of {{ totalPages }}</span>
+            <button (click)="nextPage()" [disabled]="currentPage === totalPages">Next</button>
+        </div>
+    </div>
+</div>

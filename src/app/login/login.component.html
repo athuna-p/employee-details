@@ -1,1 +1,35 @@
-<p>login works!</p>
+<div class="login">
+    <div class="col-5">
+        <img src="assets/unnamed.png" alt="" class="employee-image">
+    </div>
+    <div  class="col-7 login-content">
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+            <div class="input-group">
+                <input type="text" formControlName="username" placeholder="Username" class="input-form" />
+                <div *ngIf="loginForm.get('username')?.touched" class="error">
+                    <div *ngIf="loginForm.get('username')?.errors?.required">
+                        Username is required.
+                    </div>
+                    <div *ngIf="loginForm.get('username')?.errors?.minlength">
+                        Username must be at least 3 characters long.
+                    </div>
+                </div>
+            </div>
+            <div class="input-group">
+                <input type="password" formControlName="password" placeholder="Password" class="input-form" />
+                <div *ngIf="loginForm.get('password')?.touched" class="error">
+                    <div *ngIf="loginForm.get('password')?.errors?.required">
+                        Password is required.
+                    </div>
+                    <div *ngIf="loginForm.get('password')?.errors?.minlength">
+                        Password must be at least 6 characters long.
+                    </div>
+                </div>
+            </div>
+            <button type="submit" class="btn-login" [disabled]="loginForm.invalid">
+                Login
+            </button>
+            <div *ngIf="errorMessage" class="error">{{ errorMessage }}</div>
+        </form>
+    </div>
+</div>

@@ -1,1 +1,54 @@
-<p>employee-registration works!</p>
+
+<div class="employee-registration">
+    <button class="btn-logout" (click)="logout()">Logout</button>
+    <div class="employee-content">
+      <div class="employee-image">
+        <img src="assets/emp-login.png" alt="Employee Image" />
+      </div>
+  
+      <div class="employee-form">
+        <h2>Employee Registration</h2>
+        <form [formGroup]="employeeRegistrationForm" (ngSubmit)="onSubmit()">
+          <div class="input-group">
+            <label for="employeeName">Employee Name<span class="star"> *</span></label>
+            <input id="name" type="text" formControlName="name" placeholder="Employee Name" class="input-form" />
+            <div *ngIf="employeeRegistrationForm.get('name')?.touched && employeeRegistrationForm.get('name')?.invalid" class="error">
+              <div *ngIf="employeeRegistrationForm.get('name')?.errors?.required">Employee Name is required.</div>
+            </div>
+          </div>
+  
+          <div class="input-group">
+            <label>Contact Number<span class="star"> *</span></label>
+            <input type="number" formControlName="contactNo" placeholder="Contact Number" class="input-form" />
+            <div *ngIf="employeeRegistrationForm.get('contactNo')?.touched && employeeRegistrationForm.get('contactNo')?.invalid" class="error">
+              <div *ngIf="employeeRegistrationForm.get('contactNo')?.errors?.required">Contact Number is required.</div>
+              <div *ngIf="employeeRegistrationForm.get('contactNo')?.errors?.pattern">Enter a valid 10-digit number.</div>
+            </div>
+          </div>
+  
+          <div class="input-group">
+            <label for="email">Email<span class="star"> *</span></label>
+            <input id="email" type="text" formControlName="email" placeholder="Email" class="input-form" />
+            <div *ngIf="employeeRegistrationForm.get('email')?.touched && employeeRegistrationForm.get('email')?.invalid" class="error">
+              <div *ngIf="employeeRegistrationForm.get('email')?.errors?.required">Email is required.</div>
+              <div *ngIf="employeeRegistrationForm.get('email')?.errors?.email">Enter a valid email address.</div>
+            </div>
+          </div>
+  
+          <div class="input-group">
+            <label for="address">Address<span class="star"> *</span></label>
+            <input id="address" type="text" formControlName="address" placeholder="Address" class="input-form" />
+            <div *ngIf="employeeRegistrationForm.get('address')?.touched && employeeRegistrationForm.get('address')?.invalid" class="error">
+              <div *ngIf="employeeRegistrationForm.get('address')?.errors?.required">Address is required.</div>
+            </div>
+          </div>
+  
+          <div class="button-group">
+            <button type="button" class="btn-employee back-btn" (click)="goback()">Back</button>
+            <button type="submit" class="btn-employee" [disabled]="employeeRegistrationForm.invalid">Register</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  
